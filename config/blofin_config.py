@@ -150,6 +150,15 @@ DEMO_CONFIG = {
     "paper_trading": False  # Use Blofin's demo environment
 }
 
+# Automated Trading Configuration
+AUTOMATED_TRADING_CONFIG = {
+    'scan_interval': 300,
+    'max_open_positions': 3,
+    'enable_trailing_stop': True,
+    'trailing_stop_activation': 0.02,
+    'trailing_stop_distance': 0.01,
+}
+
 # Complete configuration dictionary
 BLOFIN_CONFIG = {
     "api": BLOFIN_API_CONFIG,
@@ -160,7 +169,8 @@ BLOFIN_CONFIG = {
     "monitoring": MONITORING_CONFIG,
     "websocket": WEBSOCKET_CONFIG,
     "logging": LOGGING_CONFIG,
-    "demo": DEMO_CONFIG
+    "demo": DEMO_CONFIG,
+    "automated_trading": AUTOMATED_TRADING_CONFIG
 }
 
 

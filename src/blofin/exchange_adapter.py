@@ -23,6 +23,7 @@ class TradingSignal:
     timeframe: str
     pattern_type: str
     timestamp: datetime
+    metadata: Dict = None  # Optional metadata
 
 
 @dataclass
