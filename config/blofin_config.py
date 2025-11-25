@@ -152,11 +152,48 @@ DEMO_CONFIG = {
 
 # Automated Trading Configuration
 AUTOMATED_TRADING_CONFIG = {
-    'scan_interval': 300,
+    'scan_interval': 300,  # 5 minutes for normal mode
+    'scalp_scan_interval': 60,  # 1 minute for scalping mode
+    'instruments': ["BTC-USDT", "ETH-USDT", "SOL-USDT"],
     'max_open_positions': 3,
     'enable_trailing_stop': True,
-    'trailing_stop_activation': 0.02,
-    'trailing_stop_distance': 0.01,
+    'trailing_stop_activation': 0.02,  # 2% for swing trades
+    'trailing_stop_distance': 0.01,  # 1% for swing trades
+    'scalp_trailing_activation': 0.01,  # 1% for scalp trades
+    'scalp_trailing_distance': 0.005,  # 0.5% for scalp trades
+}
+
+# Multi-Timeframe Analysis Configuration
+MTF_CONFIG = {
+    "scalping_mode": True,
+    "min_confidence": 0.70,  # 70% minimum confidence
+    "min_alignment": 0.65,   # 65% minimum alignment
+    "require_trend_alignment": True,
+    
+    # Timeframe weights (must sum to 1.0)
+    "timeframe_weights": {
+        # Micro timeframes (10% total) - for precise entry
+        "1s": 0.02,
+        "5s": 0.02,
+        "10s": 0.02,
+        "15s": 0.02,
+        "30s": 0.02,
+        
+        # Scalp timeframes (60% total) - primary trading timeframes
+        "1m": 0.15,
+        "5m": 0.20,
+        "15m": 0.25,
+        
+        # Swing timeframes (30% total) - trend confirmation
+        "1h": 0.15,
+        "4h": 0.15,
+    },
+    
+    # Active timeframes for analysis
+    "active_timeframes": ["1s", "5s", "10s", "15s", "30s", "1m", "5m", "15m", "1h", "4h"],
+    
+    # Cache duration for data fetching (seconds)
+    "cache_duration": 30,
 }
 
 # Complete configuration dictionary
@@ -170,7 +207,8 @@ BLOFIN_CONFIG = {
     "websocket": WEBSOCKET_CONFIG,
     "logging": LOGGING_CONFIG,
     "demo": DEMO_CONFIG,
-    "automated_trading": AUTOMATED_TRADING_CONFIG
+    "automated_trading": AUTOMATED_TRADING_CONFIG,
+    "mtf": MTF_CONFIG
 }
 
 
